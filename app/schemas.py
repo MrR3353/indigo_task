@@ -23,3 +23,17 @@ class MovieResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class FavoriteBase(BaseModel):
+    user_id: int
+    movie_id: int
+
+
+class FavoriteResponse(BaseModel):
+    id: int
+    user_id: int
+    movie_id: int
+
+    class Config:
+        from_attributes = True
