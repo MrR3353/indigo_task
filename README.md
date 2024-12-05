@@ -16,3 +16,27 @@
    
 Базу данных можно использовать любую, но подойдет и sqlite.
 
+# Запуск
+
+- склонируйте этот репозиторий
+```shell
+git clone https://github.com/MrR3353/indigo_task.git
+```
+- установите зависимости
+```shell
+pip install -r requirements.txt
+```
+- создайте БД в PostgreSQL, данные для подключения укажите в файле ```.env```
+- примените миграции alembic
+```shell
+alembic upgrade head
+```
+- примените миграции alembic
+```shell
+alembic upgrade head
+```
+- из папки app запустите сервер FastAPI
+```shell
+cd app
+uvicorn main:app
+```
