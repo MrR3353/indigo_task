@@ -5,7 +5,7 @@ from services.user_service import UserService
 from database import get_async_session
 from schemas import UserBase, UserResponse
 
-router = APIRouter(prefix='/users')
+router = APIRouter(prefix='/users', tags=['User'])
 
 
 @router.get("/{user_id}", response_model=UserResponse, summary="Возвращает пользователя по id")

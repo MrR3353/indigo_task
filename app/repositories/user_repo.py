@@ -10,33 +10,33 @@ class UserRepository:
     @staticmethod
     async def get(user_id: int, db: AsyncSession) -> User:
         result = await db.execute(select(User).filter(User.id == user_id))
-        user = result.scalars().first()
-        if not user:
+        obj = result.scalars().first()
+        if not obj:
             raise HTTPException(status_code=404, detail="User not found")
-        return user
+        return obj
 
     @staticmethod
     async def create(data: UserBase, db: AsyncSession) -> User:
-        user = User(**data.dict())
-        db.add(user)
+        obj = User(**data.dict())
+        db.add(obj)
         await db.commit()
-        await db.refresh(user)
-        return user
+        await db.refresh(obj)
+        return obj
 
     @staticmethod
     async def delete(user_id: int, db: AsyncSession) -> None:
-        user = await UserRepository.get(user_id, db)
-        await db.delete(user)
+        obj = await UserRepository.get(user_id, db)
+        await db.delete(obj)
         await db.commit()
 
     @staticmethod
     async def update(user_id: int, data: UserBase, db: AsyncSession) -> User:
-        user = await UserRepository.get(user_id, db)
+        obj = await UserRepository.get(user_id, db)
         updates_dict = data.dict(exclude_unset=True)
         for field, value in updates_dict.items():
-            setattr(user, field, value)
+            setattr(obj, field, value)
 
         await db.commit()
-        await db.refresh(user)
-        return user
+        await db.refresh(obj)
+        return obj
 
