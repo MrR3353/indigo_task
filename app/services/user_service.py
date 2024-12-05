@@ -5,20 +5,20 @@ from repositories.user_repo import UserRepository
 
 class UserService:
     @staticmethod
-    async def get_user_by_id(user_id: int, db: AsyncSession) -> UserResponse:
-        user = await UserRepository.get_user_by_id(user_id, db)
+    async def get(user_id: int, db: AsyncSession) -> UserResponse:
+        user = await UserRepository.get(user_id, db)
         return UserResponse.from_orm(user)
 
     @staticmethod
-    async def create_user(user_data: UserBase, db: AsyncSession) -> UserResponse:
-        user = await UserRepository.create_user(user_data, db)
+    async def create(data: UserBase, db: AsyncSession) -> UserResponse:
+        user = await UserRepository.create(data, db)
         return UserResponse.from_orm(user)
 
     @staticmethod
-    async def update_user(user_id: int, updates: UserBase, db: AsyncSession) -> UserResponse:
-        user = await UserRepository.update_user(user_id, updates, db)
+    async def update(user_id: int, data: UserBase, db: AsyncSession) -> UserResponse:
+        user = await UserRepository.update(user_id, data, db)
         return UserResponse.from_orm(user)
 
     @staticmethod
-    async def delete_user(user_id: int, db: AsyncSession) -> None:
-        return await UserRepository.delete_user(user_id, db)
+    async def delete(user_id: int, db: AsyncSession) -> None:
+        return await UserRepository.delete(user_id, db)

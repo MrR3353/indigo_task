@@ -9,20 +9,20 @@ router = APIRouter(prefix='/users')
 
 
 @router.get("/{user_id}", response_model=UserResponse, summary="Возвращает пользователя по id")
-async def get_user(user_id: int, db: AsyncSession = Depends(get_async_session)):
-    return await UserService.get_user_by_id(user_id, db)
+async def get(user_id: int, db: AsyncSession = Depends(get_async_session)):
+    return await UserService.get(user_id, db)
 
 
 @router.post("/", response_model=UserResponse, summary="Создает нового пользователя")
-async def create_user(user_data: UserBase, db: AsyncSession = Depends(get_async_session)):
-    return await UserService.create_user(user_data, db)
+async def create(data: UserBase, db: AsyncSession = Depends(get_async_session)):
+    return await UserService.create(data, db)
 
 
 @router.put("/{user_id}", response_model=UserResponse, summary="Обновляет данные пользователя")
-async def update_user(user_id: int, updates: UserBase, db: AsyncSession = Depends(get_async_session)):
-    return await UserService.update_user(user_id, updates, db)
+async def update(user_id: int, data: UserBase, db: AsyncSession = Depends(get_async_session)):
+    return await UserService.update(user_id, data, db)
 
 
 @router.delete("/{user_id}", summary="Удаляет пользователя по id")
-async def delete_user(user_id: int, db: AsyncSession = Depends(get_async_session)):
-    return await UserService.delete_user(user_id, db)
+async def delete(user_id: int, db: AsyncSession = Depends(get_async_session)):
+    return await UserService.delete(user_id, db)
